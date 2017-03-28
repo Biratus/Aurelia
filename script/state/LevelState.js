@@ -49,10 +49,12 @@ LevelState.prototype.init=function() {
         this.graphicHandler.start();
         this.jellyfish.start();
     },this);
+
     this.npcGenerator.onSpawn.add(function(name) {
         //if(this.hasNpc(name) && one_on_screen.indexOf(name)>=0) {this.npc_wait_q.push(name);console.log('add in wait '+name);}
         this.npc_grp.add(new Npc(name,this));
     },this);
+
     this.tint_img=game.add.image(-1,0,'mask');
     this.tint_img.width=game.world.width+2;
     this.tint_img.height=game.world.height;
@@ -111,19 +113,17 @@ LevelState.prototype.update=function() {
 
     var a=Math.floor(this.distance)%50==0;
     this.distance+=this.current_speed/30;
-    if(!a && Math.floor(this.distance)%500==0){
+    if(!a && Math.floor(this.distance)%450==0){
         var e=this.environment;
         while(e==this.environment) {
             e=game.rnd.integerInRange(0,2);
         }
         this.environment=e;
-        console.log('changeEnv');
         this.npcGenerator.changeEnvironment(e);
     }
     //this.dis_text.text="distance: "+Math.floor(this.distance/10)+" coin: "+this.coins;
 
-    this.current_speed+=0.002;
-    //if(this.current_speed===Math.round(this.current_speed)) console.log("speed: "+this.current_speed);
+    this.current_speed+=0.0015;
 }
 
 LevelState.prototype.render=function() {
