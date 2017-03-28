@@ -17,7 +17,6 @@ function NPCGenerator(type,lvlstate) {
 }
 
 NPCGenerator.prototype.changeEnvironment=function(env) {
-    this.rnd.resetTimeouts();
     for(var i in NPCProba) {
             this.rnd.setInterval(i,NPCProba[i].interval[env]);
         }

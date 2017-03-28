@@ -51,8 +51,8 @@ function RandomSpawn() {
     //val is in seconds
     this.addToRange=function(name,val) {this.obj[name].range+=val*1000;}
     this.addToInterval=function(name,val) {this.obj[name].interval+=val*1000;}
-    this.setRange=function(name,val){this.obj[name].range=val;}
-    this.setInterval=function(name,val){this.obj[name].interval=val;}
+    this.setRange=function(name,val){this.obj[name].range=val*1000;}
+    this.setInterval=function(name,val){this.obj[name].interval=val*1000;}
 
     this.start=function() {
         for (var i in this.obj) {
@@ -86,18 +86,25 @@ function RandomSpawn() {
 //Allows to pause/resume timeouts events
 //not the original version
 
+//Function use to create a timer
 function Timer(callback, delay,ctx,arg) {
     this.timerId, this.start, this.remaining = delay;
-    this.ctx=ctx,this.arg=arg,this.callback=callback;
+    this.ctx=ctx,this.arg=arg,this.callback=callback,this.isRunning=false;
 
     this.pause = function() {
         clearTimeout(this.timerId);
-        this.remaining = this.remaining-(game.time.now - this.start);
+        this.isRunning=false;
+        this.remaining = this.remaining-(new Date().getTime() - this.start);
     };
-
     this.resume = function() {
-        this.start = game.time.now;
+        if(this.isRunning) return;
+        this.start = new Date().getTime();
         this.timerId = setTimeout(this.callback, this.remaining,this.ctx,this.arg);
+        this.isRunning=true;
     };
+    this.timeRemaining=function() {
+        return this.remaining-(new Date().getTime() - this.start);//this.start+this.remaining-new Date().getTime();
+    }
     this.resume();
+    this.isRunning=true;
 }
