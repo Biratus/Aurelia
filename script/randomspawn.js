@@ -77,6 +77,7 @@ function RandomSpawn() {
         var r=Math.random()*this.obj[name].range*2-this.obj[name].range;
         this.timeouts[name].remaining=r+this.obj[name].interval;
         this.timeouts[name].arg[1]=r+this.obj[name].interval;
+        this.timeouts[name].isRunning=false;
         this.timeouts[name].resume();
         this.onSpawn.dispatch(name,t);
     }
