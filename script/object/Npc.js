@@ -66,7 +66,7 @@ Npc.Boat=function() {
                     this.engaged = true;
                     this.boat.lvlstate.audio.harpoon.play();
                     var r=this.rotation;
-                    game.physics.p2.enable(this,true);
+                    game.physics.p2.enable(this);
                     this.body.collideWorldBounds=false;
                     this.body.rotation=r;
                     this.body.setCollisionGroup(this.boat.lvlstate.collision_grp);
