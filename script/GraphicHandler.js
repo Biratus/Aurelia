@@ -11,12 +11,12 @@ function GraphicHandler(type) {
     this.groups={
         bg:game.add.group(),
         rocks:game.add.group(),
-        raycast:new RayCast(game.world.width/2,y_pos,radius,{"distance":game.world.height*0.5,
+        raycast:new RayCast(game.world.width/2,y_pos,radius,{"distance":game.world.height*0.8,
             "color":"rgba(255,255,150,0.3)",
-            "diffuse":0.8,
-            "radius":10,
-            "samples":10
-        },14,0.5,6),
+            "diffuse":0.5,
+            "radius":5,
+            "samples":7
+        },14,0.5,5),
         sand:game.add.group(),
         bubbles:game.add.group(),
         plant:game.add.group()
@@ -278,7 +278,7 @@ function RayCast(x_pos,y_pos,radius,lamp_config,ray_nb,speed,poly_length) {
     this.lamp=game.add.illuminated.lamp(x_pos,y_pos,lamp_config);
     this.speed=speed;
     //costs too much memory
-    /*var my_obj=[];
+    var my_obj=[];
     var a=0;
     for(var i=0;i<ray_nb;i++){
         my_obj.push(game.add.illuminated.polygonObject([
@@ -292,10 +292,10 @@ function RayCast(x_pos,y_pos,radius,lamp_config,ray_nb,speed,poly_length) {
                 y:-Math.sin(game.math.degToRad(a-poly_length))*radius+y_pos}
         ],1));
         a-=360/ray_nb;
-    }*/
-    this.lamp.createLighting();//my_obj);
+    }
+    this.lamp.createLighting(my_obj);
 }
 RayCast.prototype.update=function() {
-    //this.lamp.refresh();
-    //this.lamp.rotation+=game.math.degToRad(this.speed);
+    this.lamp.refresh();
+    this.lamp.rotation+=game.math.degToRad(this.speed);
 }
