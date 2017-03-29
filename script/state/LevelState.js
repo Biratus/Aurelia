@@ -127,19 +127,10 @@ LevelState.prototype.update=function() {
 }
 
 LevelState.prototype.render=function() {
-    //game.debug.body(this.jellyfish,'red',false);
-
-    //game.debug.spriteBounds(this.jellyfish,'red',false);
-    /*for(var i in this.npcs) {
-        if(this.npcs[i].name=="coin"){// && this.npcs[i].weapon=="harpoon") {
-            game.debug.spriteBounds(this.npcs[i],'red',false);
-        }
-    }*/
-    //game.debug.spriteBounds(this.jellyfish,'red',false);
     //game.debug.geom(this.jellyfish.my_body(),"#e23b24");
     game.debug.text("distance: "+Math.round(this.distance), 20, 20, "#ffffff");
     game.debug.text("coins: "+this.coins, 20, 50, "#000000");
-    game.debug.text(game.time.fps || '--', game.world.width-20, 20, "#00ff00");
+    //game.debug.text(game.time.fps || '--', game.world.width-20, 20, "#00ff00"); //DISPLAY FPS
 }
 
 LevelState.prototype.end=function() {
